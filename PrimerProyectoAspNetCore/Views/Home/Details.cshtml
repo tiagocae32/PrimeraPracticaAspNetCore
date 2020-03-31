@@ -1,0 +1,31 @@
+﻿@model Usuario
+
+
+@{ 
+    ViewBag.Title = "Detalles del usuario";
+}
+
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Info de un usuario en particular</h1>
+
+        <div>
+
+            <ul>
+                <li>@Model.nombre</li>
+                <li>@Model.email</li>
+                <li>@Model.edad</li>
+            </ul>
+
+
+        </div>
+
+
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver al menu principal</a>
+
+    </body>
+    </html>

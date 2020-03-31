@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Usuario>
+
+
+@{ 
+    ViewBag.Title = "Datos de todos los usuarios";
+}
+
+
+    <html >
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Aqui estan todos los usuarios</h1>
+
+        <div>
+            <ul>
+                @foreach (var Usuario in Model)
+                {
+                    <li>@Usuario.nombre</li>
+                    <li>@Usuario.email</li>
+                    <li>@Usuario.edad</li>
+                    <a asp-controller="Home" asp-action="Details" asp-route-id="@Usuario.id" class="btn btn-primary">Ver Usuario</a>
+                }
+            </ul>
+
+        </div>
+
+    </body>
+    </html>
