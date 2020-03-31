@@ -1,4 +1,4 @@
-﻿
+﻿@model Usuario
 
 @{ 
     ViewBag.Title = "Crear un usuario";
@@ -6,10 +6,33 @@
 
 
     <div>
-        <form action="/" method="post">
+        <form asp-controller="Home" asp-action="Create" method="post">
+
+            <div>
+                <label asp-for="nombre"></label>
+                <input asp-for="nombre" type="text"  placeholder="Nombre" />
+                <span asp-validation-for="nombre" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="email"></label>
+                <input asp-for="email" type="text"  placeholder="email" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="edad"></label>
+                <input asp-for="edad" type="number" placeholder="edad" />
+                <span asp-validation-for="edad" class="text-danger"></span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Agregar usuario</button>
 
 
-            <input type="text" name="name" value="" placeholder="Nombre" />
+            </div>
 
         </form>
+
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver al Inicio</a>
     </div>

@@ -1,0 +1,47 @@
+﻿@model EditarUsuarioModel
+
+
+
+
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+    </head>
+    <body>
+
+
+        <div>
+            <form asp-controller="Home" asp-action="Edite" method="post">
+
+                <div>
+                    <label asp-for="nombre"></label>
+                    <input asp-for="nombre" type="text" placeholder="Nombre" />
+                    <span asp-validation-for="nombre" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <label asp-for="email"></label>
+                    <input asp-for="email" type="text" placeholder="email" />
+                    <span asp-validation-for="email" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <label asp-for="edad"></label>
+                    <input asp-for="edad" type="number" placeholder="edad" />
+                    <span asp-validation-for="edad" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary">Editar usuario</button>
+
+
+                </div>
+
+            </form>
+
+            <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+
+
+    </body>
+    </html>

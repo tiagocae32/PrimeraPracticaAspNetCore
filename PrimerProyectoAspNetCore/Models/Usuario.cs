@@ -16,7 +16,7 @@ namespace PrimerProyectoAspNetCore.Models
         public string nombre { get; set; }
 
         [Required]
-        [RegularExpression(@"^[_a - z0 - 9 -] + (.[_a - z0 - 9 -] +) *@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$",ErrorMessage = "El formato de este email no es valido")]
+        //[RegularExpression(@"^[_a - z0 - 9 -] + (.[_a - z0 - 9 -] +) *@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$",ErrorMessage = "El formato de este email no es valido")]
         public string email { get; set; }
 
         [Required]

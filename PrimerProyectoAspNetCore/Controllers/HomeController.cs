@@ -19,7 +19,7 @@ namespace PrimerProyectoAspNetCore.Controllers
         }
 
         [Route("")]
-        [Route("/Home")]
+        [Route("Home")]
         public ViewResult Index()
         {
             var Usuarios = usuarios.obtenerTodosLosUsuarios();
@@ -41,8 +41,8 @@ namespace PrimerProyectoAspNetCore.Controllers
             return View(usuario);
         }
 
-        [HttpGet]
         [Route("Home/Create")]
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
@@ -54,14 +54,15 @@ namespace PrimerProyectoAspNetCore.Controllers
             if (ModelState.IsValid)
             {
                 Usuario nuevoUsuario = usuarios.agregarUsuario(usuario);
-                RedirectToAction("details", new { id = nuevoUsuario.id });
+                RedirectToAction("Details", new { id = nuevoUsuario.id });
+                //RedirectToAction("Index");
             }
             return View();
         }
 
         [HttpGet]
         [Route("Home/Edite/{id}")]
-        public ViewResult Edit(int id)
+        public ViewResult Edite(int id)
         {
             Usuario usuario = usuarios.obtenerUsuario(id);
 
@@ -76,6 +77,25 @@ namespace PrimerProyectoAspNetCore.Controllers
             return View(infoUsuario);
         }
 
+        [HttpPost]
+        public IActionResult Edite(EditarUsuarioModel model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Usuario usuario = usuarios.obtenerUsuario(model.id);
+
+                usuario.nombre = model.nombre;
+                usuario.email = model.email;
+                usuario.edad = usuario.edad;
+
+                Usuario usuarioModificado = usuarios.editarUsuario(usuario);
+
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
         
 
     }
