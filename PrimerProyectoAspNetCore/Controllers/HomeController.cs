@@ -49,13 +49,18 @@ namespace PrimerProyectoAspNetCore.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Usuario usuario)
+        public IActionResult Create(CrearUsuarioModel usuario)
         {
             if (ModelState.IsValid)
             {
-                Usuario nuevoUsuario = usuarios.agregarUsuario(usuario);
-                RedirectToAction("Details", new { id = nuevoUsuario.id });
-                //RedirectToAction("Index");
+                Usuario nuevoUsuario = new Usuario()
+                {
+                    nombre = usuario.nombre,
+                    email = usuario.email,
+                    edad = usuario.edad
+                };
+                usuarios.agregarUsuario(nuevoUsuario);
+                return RedirectToAction("Details", new { id = nuevoUsuario.id });
             }
             return View();
         }
@@ -96,7 +101,21 @@ namespace PrimerProyectoAspNetCore.Controllers
 
             return View();
         }
-        
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+
+            Usuario usuarioDelete = usuarios.eliminarUsuario(id);
+
+            if(usuarioDelete != null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return View();
+        }
+
 
     }
 }

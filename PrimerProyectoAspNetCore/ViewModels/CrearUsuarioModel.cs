@@ -8,7 +8,7 @@ namespace PrimerProyectoAspNetCore.ViewModels
 {
     public class CrearUsuarioModel
     {
-
+       
         [Required]
         [MinLength(5, ErrorMessage = "Minimo 5 caracteres")]
         public string nombre { get; set; }

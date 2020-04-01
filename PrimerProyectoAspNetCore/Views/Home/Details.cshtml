@@ -22,7 +22,9 @@
             </ul>
 
 
-            <a asp-controller="Home" asp-action="Edite" asp-route-id="@Model.id">Editar Usuario</a>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Edite" asp-route-id="@Model.id">Editar Usuario</a>
+
+            <a class="btn btn-danger" asp-controller="Home" asp-action="Delete" asp-route-id="@Model.id">Eliminar usuario</a>
 
             <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver al menu principal</a>
 
