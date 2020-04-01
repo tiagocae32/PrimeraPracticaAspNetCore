@@ -12,10 +12,12 @@ namespace PrimerProyectoAspNetCore.Controllers
     {
 
         private IUsuario usuarios;
+        private DBUsuarioContext context;
 
-        public HomeController(IUsuario Usuarios)
+        public HomeController(IUsuario Usuarios,DBUsuarioContext Context)
         {
             usuarios = Usuarios;
+            context = Context;
         }
 
         [Route("")]
@@ -32,11 +34,11 @@ namespace PrimerProyectoAspNetCore.Controllers
         {
             Usuario usuario = usuarios.obtenerUsuario(id);
 
-            /*if(usuario == null)
+            if(usuario == null)
             {
                 Response.StatusCode = 404;
                 return View("UsuarioNotFound", id);
-            }*/
+            }
 
             return View(usuario);
         }
@@ -102,20 +104,17 @@ namespace PrimerProyectoAspNetCore.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
+        //utilizando async y await
+        public async Task<IActionResult>Delete(int id)
         {
+            var usuario = await context.dataUsuarios.FindAsync(id);
 
-            Usuario usuarioDelete = usuarios.eliminarUsuario(id);
+            context.dataUsuarios.Remove(usuario);
 
-            if(usuarioDelete != null)
-            {
-                return RedirectToAction("Index");
-            }
+            await context.SaveChangesAsync();
 
-            return View();
+            return RedirectToAction(nameof(Index));
         }
-
 
     }
 }
