@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PrimerProyectoAspNetCore.Models;
 using PrimerProyectoAspNetCore.ViewModels;
 using System;
@@ -20,7 +21,7 @@ namespace PrimerProyectoAspNetCore.Controllers
             context = Context;
         }
 
-        [Route("")]
+        /*[Route("")]
         [Route("Home")]
         public ViewResult Index()
         {
@@ -28,8 +29,16 @@ namespace PrimerProyectoAspNetCore.Controllers
 
             return View(Usuarios);
         }
+        */
 
-        [Route("Home/Details/{id}")]
+        //Get Method
+        public async Task<ViewResult> Index()
+        {
+            return View(await context.dataUsuarios.ToListAsync());
+        }
+
+
+        /*[Route("Home/Details/{id}")]
         public ViewResult Details(int id)
         {
             Usuario usuario = usuarios.obtenerUsuario(id);
@@ -41,7 +50,20 @@ namespace PrimerProyectoAspNetCore.Controllers
             }
 
             return View(usuario);
+        }*/
+
+        public async Task<ViewResult> Details(int id)
+        {
+            Usuario usuario = await context.dataUsuarios.FindAsync(id);
+
+            if (usuario == null)
+            {
+                Response.StatusCode = 404;
+                return View("UsuarioNotFound", id);
+            }
+            return View(usuario);
         }
+
 
         [Route("Home/Create")]
         [HttpGet]
@@ -67,6 +89,7 @@ namespace PrimerProyectoAspNetCore.Controllers
             return View();
         }
 
+        
         [HttpGet]
         [Route("Home/Edite/{id}")]
         public ViewResult Edite(int id)
