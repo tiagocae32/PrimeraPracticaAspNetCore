@@ -29,7 +29,7 @@ namespace PrimerProyectoAspNetCore
 
             //configuracion con la base de datos
             services.AddDbContextPool<DBUsuarioContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConexionSQL")));
-
+            // Comment
             services.AddMvc();
 
             services.AddScoped<IUsuario, SqlUsuarioRepositorio>();
