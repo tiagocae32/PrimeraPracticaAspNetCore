@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +30,10 @@ namespace PrimerProyectoAspNetCore
 
             //configuracion con la base de datos
             services.AddDbContextPool<DBUsuarioContext>(options => options.UseSqlServer(configuration.GetConnectionString("ConexionSQL")));
-            // Comment
+
+            //configurando Identity Framework
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DBUsuarioContext>();
+            
             services.AddMvc();
 
             services.AddScoped<IUsuario, SqlUsuarioRepositorio>();
@@ -52,16 +56,18 @@ namespace PrimerProyectoAspNetCore
 
             //app.UseMvcWithDefaultRoute();
 
+            app.UseAuthentication();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
             
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            //app.Run(async (context) =>
+            //{
+             //   await context.Response.WriteAsync("Hello World!");
+            //});
         }
     }
 }

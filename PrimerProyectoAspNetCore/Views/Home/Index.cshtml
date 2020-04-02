@@ -1,34 +1,51 @@
 ﻿@model IEnumerable<Usuario>
+@inject SignInManager<IdentityUser> signInManager;
 
-
-@{ 
+@{
     ViewBag.Title = "Datos de todos los usuarios";
 }
 
 
-    <html >
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <h1>Aqui estan todos los usuarios</h1>
 
-        <div>
-            <ul>
-                @foreach (var Usuario in Model)
-                {
-                    <li>@Usuario.nombre</li>
-                    <li>@Usuario.email</li>
-                    <li>@Usuario.edad</li>
-                    <a asp-controller="Home" asp-action="Details" asp-route-id="@Usuario.id" class="btn btn-primary">Ver Usuario</a>
-                }
-            </ul>
+<h1>Aqui estan todos los usuarios</h1>
 
-        </div>
+<div>
+    <ul>
+        @foreach (var Usuario in Model)
+        {
+            <li>@Usuario.nombre</li>
+            <li>@Usuario.email</li>
+            <li>@Usuario.edad</li>
+            <a asp-controller="Home" asp-action="Details" asp-route-id="@Usuario.id" class="btn btn-primary">Ver Usuario</a>
+        }
+    </ul>
 
-        <div>
-            <a asp-controller="Home" asp-action="Create">Crear un usuario</a>
-        </div>
+</div>
 
-    </body>
-    </html>
+<div>
+    <a asp-controller="Home" asp-action="Create">Crear un usuario</a>
+</div>
+
+<div>
+
+    <ul>
+        @if (signInManager.IsSignedIn(User))
+        {
+
+            <li>
+                <form method="post" asp-controller="Account" asp-action="LogOut">
+                    <button class="btn btn-primary" type="submit">Log out @User.Identity.Name</button>
+                </form>
+            </li>
+        }
+        else
+        {
+            <li><a class="btn btn-primary" asp-controller="Account" asp-action="Register">Registro de Usuarios</a></li>
+            <li><a class="btn btn-primary" asp-controller="Account" asp-action="Login">Log in</a></li>
+        }
+    </ul>
+
+    
+        
+    
+</div>

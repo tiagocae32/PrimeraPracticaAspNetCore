@@ -1,0 +1,40 @@
+﻿@model LoginUsuarioModel
+
+@{ 
+    ViewBag.Title = "Login de usuario";
+}
+
+
+
+    <div class="container">
+        <form asp-controller="Account" asp-action="LogIn" method="post">
+
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" type="text" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="custom-checkbox">
+                <label asp-for="RememberMe">
+                    <input asp-for="RememberMe" />
+                    @Html.DisplayNameFor(m => m.RememberMe)
+                </label>
+
+            </div>
+
+            <button class="btn btn-primary" type="submit">Loguearse</button>
+
+        </form>
+
+        <a asp-controller="Home" asp-action="Index">Volver al inicio</a>
+    </div>

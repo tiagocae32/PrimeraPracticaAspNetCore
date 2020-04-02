@@ -1,0 +1,50 @@
+﻿@model RegisterUsuarioModel
+
+
+@{ 
+    ViewBag.Title = "Registro de Usuarios";
+
+    
+}
+
+
+
+
+    <div class="container">
+
+
+        <form asp-controller="Account" asp-action="Register" method="post">
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" type="text" placeholder="Email" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" placeholder="Password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label asp-for="ConfirmPassword"></label>
+                <input asp-for="ConfirmPassword" type="password" placeholder="Confirm Password" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary">Registrar usuario</button>
+
+
+            </div>
+
+        </form>
+
+
+        <a asp-controller="Home" asp-action="Index">Volver al inicio</a>
+
+
+    </div>
