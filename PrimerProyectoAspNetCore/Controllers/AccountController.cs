@@ -25,6 +25,23 @@ namespace PrimerProyectoAspNetCore.Controllers
         }
 
 
+        //utilizando tanto httpget como httppost en este metodo para verificar si un email en nuestra base de datos ya existe
+        [AcceptVerbs("Post", "Get")]
+        public async Task<IActionResult> chequearEmail(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+
+            if(user == null)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"El email { email} ya existe en nuestra lista de usuarios");
+            }
+        }
+
+
         [HttpGet]
         public IActionResult Login()
         {
