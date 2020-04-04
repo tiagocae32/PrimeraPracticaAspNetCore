@@ -7,20 +7,29 @@
 
 
 
-<h1>Aqui estan todos los usuarios</h1>
 
-<div>
-    <ul>
-        @foreach (var Usuario in Model)
-        {
-            <li>@Usuario.nombre</li>
-            <li>@Usuario.email</li>
-            <li>@Usuario.edad</li>
-            <a asp-controller="Home" asp-action="Details" asp-route-id="@Usuario.id" class="btn btn-primary">Ver Usuario</a>
-        }
-    </ul>
+@if (Model.Any())
+{
+    <h1>Informacion de todos los usuarios</h1>
+    <div>
+        <ul>
+            @foreach (var Usuario in Model)
+            {
+                <li>@Usuario.nombre</li>
+                <li>@Usuario.email</li>
+                <li>@Usuario.edad</li>
+                <a asp-controller="Home" asp-action="Details" asp-route-id="@Usuario.id" class="btn btn-primary">Ver Usuario</a>
+            }
+        </ul>
 
-</div>
+    </div>
+}
+else
+{
+    <h1>No hay ningun usuario cargado</h1>
+}
+
+
 
 <div>
     <a asp-controller="Home" asp-action="Create">Crear un usuario</a>
@@ -45,7 +54,7 @@
         }
     </ul>
 
-    
-        
-    
+
+
+
 </div>
