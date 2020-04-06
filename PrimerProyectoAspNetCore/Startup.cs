@@ -34,6 +34,7 @@ namespace PrimerProyectoAspNetCore
             //configurando Identity Framework
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DBUsuarioContext>();
             
+            //servicio para poder utilizar el patron de diseño mvc
             services.AddMvc();
 
             services.AddScoped<IUsuario, SqlUsuarioRepositorio>();
